@@ -9,10 +9,11 @@ Cas authentication strategies for Passport.
 
 #### Configure Strategy
 
-    passport.use(new (require('passport-cas').Strategy)({
+    passport.use(new CASStrategy({
       ssoBaseURL: 'http://www.example.com/',
       serverBaseURL: 'http://localhost:3000'
-    }, function(login, done) {
+    },
+    function(login, done) {
       User.findOne({login: login}, function (err, user) {
         if (err) {
           return done(err);
@@ -106,7 +107,7 @@ CAS 2.0 will work with the CAS 3.0 configuration, but you need to set the valida
       validateURL: '/serviceValidate'
     }, function(profile, done) {
       var login = profile.user;
-    
+
       User.findOne({login: login}, function (err, user) {
         if (err) {
           return done(err);
